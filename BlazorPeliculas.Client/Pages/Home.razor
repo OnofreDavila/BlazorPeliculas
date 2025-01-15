@@ -1,0 +1,308 @@
+﻿@page "/"
+@using BlazorPeliculas.Shared
+@inject HttpClient Http
+@* @rendermode InteractiveWebAssembly *@
+<PageTitle>Movies</PageTitle>
+
+<center><h1>PELICULAS EN CARTELERA</h1></center>
+
+@* ------------------------------- *@
+@* Llama el mensaje de la conexión *@
+@* Estado de la conexión
+<p>@conexionServidor</p>
+<p>@conexionPeliculas</p> *@
+@* ------------------------------- *@
+
+@* ------------------------------FORMULARO DE BIBLIOTECA------------------------------------------- *@
+
+<div class="bg-degrade">
+    <div class="column">
+        <h2>FORMULARIO</h2>
+      
+            <EditForm Model="@pelicula" OnValidSubmit="ShowLoadingDataAsync" FormName="createOrUpdate">
+                <DataAnnotationsValidator />
+
+                @* --------------     BOOTSTRAP TEXT     -------------------------- *@
+
+                <div class="mb-3">
+                    <label class="col-md-2 col-form-label">Nombre:</label>
+                    <div class="mb-3">
+                        <InputText class="form-control" @bind-Value="pelicula!.NombrePelicula" />
+                        <ValidationMessage For="@(() =>pelicula!.NombrePelicula)" />
+                    </div>
+                </div>
+
+                @* --------------     BOOTSTRAP TEXT     -------------------------- *@
+
+                <div class="mb-3">
+                    <label class="col-md-2 col-form-label">Director:</label>
+                    <div class="mb-3">
+                        <InputText class="form-control" @bind-Value="pelicula!.Director" />
+                        <ValidationMessage For="@(() =>pelicula!.Director)" />
+                    </div>
+                </div>
+        
+                @* --------------     BOOTSTRAP INT      -------------------------- *@
+
+                <div class="mb-3">
+                    <label class="form-label">Duración:</label>
+                    <NumberInput TValue="int" @bind-Value="pelicula.Duracion" AllowNegativeNumbers="false" />
+                    <ValidationMessage For="@(() => pelicula.Duracion)" />
+                </div>
+      
+                 @* --------------     BOOTSTRAP FECHA       -------------------------- *@
+
+                <div class="mb-3">
+                    <label for="fecha">Fecha de Estreno:</label>
+                
+                    <div class="mb-3">
+                        <DateInput TValue="DateOnly" @bind-Value="pelicula!.FechaEstreno" Placeholder="Enter Date" />
+                    </div>
+                </div>
+
+                @* --------------     BOOTSTRAP BOTÓN      -------------------------- *@
+        
+                <Button Color="ButtonColor.Success" Type="ButtonType.Submit">Guardar pelicula </Button>
+                <Preload LoadingText="Cargando..." />
+                <br />
+                <br />
+                @* --------------     FIN BOOTSTRAP      -------------------------- *@
+            </EditForm>
+
+        @* --------------     ALERTA    -------------------------- *@
+            @if (!string.IsNullOrEmpty(message))
+            {
+                <Alert Color="@alertColor" Dismissable="false"> <Icon Name="@alertIconName" class="me-2"></Icon>@message </Alert>
+            }
+        @* --------------     FIN ALERTA     -------------------------- *@
+    </div>
+    <br />
+            <div class="column">
+                    @if(peliculas.Count == 0){ <h3>No existen registros @message </h3> }
+                    else
+                    {
+                  
+                        <h2>LISTADO PELICULAS</h2>
+                        <table class="table table-striped" id="tabla" name="tabla"  cellspacing="3" cellpadding="3" style="font-size: 10pt">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Director</th>
+                                    <th>Duración</th>
+                                    <th>Fecha Estreno</th>
+                                    <th>Actualizar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var pelicula in peliculas)
+                                {
+                                    <tr @key="pelicula.Id">
+                                        <td>@pelicula.Id</td>
+                                        <td>@pelicula.NombrePelicula</td>
+                                        <td>@pelicula.Director</td>
+                                        <td>@pelicula.Duracion</td>
+                                        <td>@pelicula.FechaEstreno</td>
+                                        <td><Button Color="ButtonColor.Info" Outline="true" @onclick="() => this.pelicula = pelicula">Actualizar</Button></td>
+                                        <td><Button Color="ButtonColor.Danger" Outline="true" @onclick="() => DeletePelicula(pelicula.Id)">Eliminar</Button></td>
+                                
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+          
+            </div>
+            
+}
+        </div>
+@* --------------------------------FIN FORMULARIO-------------------------------------------------------------- *@
+@* --------------------------------CSS-------------------------------------------------------------- *@
+<style>
+    .column {
+        width: min(60%, 120rem);
+        margin: 0 auto;
+    }    
+    .tabla{
+        margin: auto;
+    }
+    .bg-degrade {
+        background: rgb(34,193,195);
+        background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,0.6699054621848739) 100%);
+    }
+</style>
+@* --------------------------------FIN CSS-------------------------------------------------------------- *@
+
+@code{
+    @* ------------------------------- *@
+    //Variables
+    string url = "https://localhost:7150/";
+    string conexionServidor = "Conectando..";
+    string conexionPeliculas = "Conectando..";
+    @* ------------------------------- *@
+
+
+    //Método operación asíncrona que envía una solicitud GetStringAsync mediante la url al controlador.
+    async Task ProbarConexion()
+    {
+        var respuesta = await Http.GetStringAsync(url + "api/Pelicula/ConexionServidor");
+        conexionServidor = respuesta;
+
+        //------Petición a ConexionPeliculas-----//
+        var respuestaPeliculas = await Http.GetStringAsync(url + "api/Pelicula/ConexionPeliculas");
+        conexionPeliculas = respuestaPeliculas;
+      
+    }
+    @* ------------------------------- *@
+
+    //Inicializar componente
+    protected override async Task OnInitializedAsync()
+    {
+        await ProbarConexion();
+        await GetPeliculas();
+    }
+    @* ------------------------------- *@
+
+
+    @* -------------VARIABLES FORMULARIO------------------ *@
+    string message = string.Empty;
+    AlertColor alertColor = AlertColor.Primary;
+    IconName alertIconName = IconName.CheckCircleFill;
+    List<Pelicula> peliculas = new List<Pelicula>();
+
+    [SupplyParameterFromForm(FormName = "createOrUpdate")]
+    Pelicula pelicula { get; set; } = new();
+    @* -------------------------------------------------- *@
+
+
+
+
+    @* ---------------PRELOAD----------------------------------- *@
+    [Inject] protected PreloadService PreloadService { get; set; } = default!;
+
+    private async Task ShowLoadingDataAsync()
+    {
+        PreloadService.Show(SpinnerColor.Light, "Cargando...");
+        await Task.Delay(3000);
+
+        await CreateOrUpdatePelicula();
+
+        PreloadService.Hide();
+    }
+    @* -------------------------------------------------- *@
+
+
+
+
+
+
+    @* -------------MÉTODO LISTAR PELICULAS----------------- *@
+    async Task GetPeliculas()
+    {
+        try
+        {
+            var movies = await Http.GetFromJsonAsync<List<Pelicula>>(url + "api/Pelicula/PeliculasListar");
+            peliculas = movies;
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+        
+    }
+    @* ----------------------------------------------------- *@
+
+
+    @* -------------MÉTODO QUE BUSCA CREAR O ACTUALIZAR PELICULA----------------- *@
+    async Task CreateOrUpdatePelicula()
+    {
+            try
+            {
+                PreloadService.Show();
+
+                if (pelicula.Id == 0)
+                    await CreatePelicula();
+                else
+                    await UpdatePelicula();
+            }
+            catch{}
+            finally
+            {
+                PreloadService.Hide();
+            }
+    }
+    @* ---------------------------------------------------------------------- *@
+
+    @* -------------MÉTODO CREAR NUEVA PELICULA----------------- *@
+    async Task CreatePelicula()
+    {
+        var res = await Http.PostAsJsonAsync(url + "api/Pelicula/PeliculaAgregar", pelicula);
+
+        if (res.IsSuccessStatusCode)
+        {
+          
+            alertColor = AlertColor.Success;
+            alertIconName = IconName.CheckCircleFill;
+            message = "Nueva pelicula disponible en cartelera!";
+            pelicula = new();
+        }
+        else
+        {
+            message = "Error al crear pelicula";
+        }
+
+        await GetPeliculas();
+    }
+    @* ---------------------------------------------------------------------- *@
+
+
+    @* -------------------MÉTODO ACTUALIZAR PELICULA----------------- *@
+    async Task UpdatePelicula()
+    {
+        var res = await Http.PutAsJsonAsync<Pelicula>(url + "api/Pelicula/pelicula/" + pelicula.Id, pelicula);
+
+        if (res.IsSuccessStatusCode) 
+        { 
+            alertColor = AlertColor.Info;
+            alertIconName = IconName.ExclamationCircleFill;
+            message = $"Pelicula {pelicula.NombrePelicula} actualizada con éxito";
+        }
+        else
+        {
+            message = "Pelicula no puedo ser actualizada";
+        }
+
+        pelicula = new();
+
+        await GetPeliculas();
+    }
+    @* ---------------------------------------------------------------------- *@
+
+    @* -------------------MÉTODO ELIMINAR PELICULA----------------- *@
+   
+    async Task DeletePelicula(int id)
+    {
+        
+            var res = await Http.DeleteAsync(url + $"api/Pelicula/pelicula/{id}");
+
+            if (res.IsSuccessStatusCode)
+            {
+
+                alertColor = AlertColor.Danger;
+                alertIconName = IconName.ExclamationTriangleFill;
+                message = "Pelicula eliminada";
+                await GetPeliculas();
+            }
+            else
+            {
+                message = "Error al eliminar pelicula";
+            }
+
+
+    }
+    @* ---------------------------------------------------------------------- *@
+
+    
+}
+
