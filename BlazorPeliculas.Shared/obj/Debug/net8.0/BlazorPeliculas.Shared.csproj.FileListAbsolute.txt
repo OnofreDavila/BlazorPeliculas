@@ -1,0 +1,22 @@
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\bin\Debug\net8.0\BlazorPeliculas.Shared.deps.json
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\bin\Debug\net8.0\BlazorPeliculas.Shared.dll
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\bin\Debug\net8.0\BlazorPeliculas.Shared.pdb
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.AssemblyInfoInputs.cache
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.AssemblyInfo.cs
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.dll
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\refint\BlazorPeliculas.Shared.dll
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.pdb
+C:\Users\Hati_\source\repos\BlazorPeliculas.Shared\obj\Debug\net8.0\ref\BlazorPeliculas.Shared.dll
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\bin\Debug\net8.0\BlazorPeliculas.Shared.deps.json
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\bin\Debug\net8.0\BlazorPeliculas.Shared.dll
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\bin\Debug\net8.0\BlazorPeliculas.Shared.pdb
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.AssemblyInfoInputs.cache
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.AssemblyInfo.cs
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.csproj.CoreCompileInputs.cache
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.dll
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\refint\BlazorPeliculas.Shared.dll
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\BlazorPeliculas.Shared.pdb
+D:\Documentos\1 TRABAJOS DEL INSTITUTO\BIMESTRE 8\PROGRAMACION MULTIPLATAFORMA\BLAZOR PELICULAS PWA\BLAZOR PELICULAS PWA\BlazorPeliculas.Shared\obj\Debug\net8.0\ref\BlazorPeliculas.Shared.dll
